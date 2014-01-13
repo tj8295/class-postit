@@ -1,0 +1,14 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true]
+	"Category" [shape=Mrecord, label="{Category|id :integer\lname :string\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Comment" [shape=Mrecord, label="{Comment|id :integer\lbody :text\luser_id :integer\lpost_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Post" [shape=Mrecord, label="{Post|id :integer\ltitle :string\lurl :string\ldescription :text\luser_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"PostCategory" [shape=Mrecord, label="{PostCategory|id :integer\lcategory_id :integer\lpost_id :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"User" [shape=Mrecord, label="{User|id :integer\lusername :string\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Category" -> "PostCategory" [arrowtail=odot, arrowhead=crow, dir=both color="#3BC539"]
+	"Category" -> "Post" [arrowtail=crow, arrowhead=crow, dir=both color="#E32E3F"]
+	"Post" -> "Comment" [arrowtail=odot, arrowhead=crow, dir=both color="#75414A"]
+	"Post" -> "PostCategory" [arrowtail=odot, arrowhead=crow, dir=both color="#2DBFCB"]
+	"User" -> "Post" [arrowtail=odot, arrowhead=crow, dir=both color="#8AE41F"]
+	"User" -> "Comment" [arrowtail=odot, arrowhead=crow, dir=both color="#1768C4"]
+}

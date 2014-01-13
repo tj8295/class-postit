@@ -17,6 +17,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+    gem 'railroady'
+end
+
 group :development do
   gem 'quiet_assets'
   gem 'pry'
