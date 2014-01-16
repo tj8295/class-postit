@@ -1,18 +1,91 @@
-<p>
-  <%= render @post.categories %>
-
-  <% @post.categories.each do |category| %>
-  <span class='badge'><%= category.name %></span>
-<% end %>
-
+<p class="pull-right">
+  [<%= link_to 'edit this post', edit_post_path(@post) %>]
 </p>
 
-<%= render 'shared/content_title', title: @post.title %>
-
-
-
+<p>
+  <%= render @post.categories %>
+</p>
+<h4>Hi there, you are viewing
+  <%= link_to @post.title, fix_url(@post.url) %></h4>
+<%#= render 'shared/content_title', title: @post.title %>
 <p>
   <%= @post.description %>
   <hr />
 </p>
+<small>by <%= @post.creator.username %></small>
 
+<%= form_for [@post, @comment] do |f| %>
+<!-- /posts/3/comments -->
+  <%= render 'shared/errors', obj: @comment %>
+  <div class='control-group'>
+    <%= f.label :body, 'Leave a comment' %>
+    <%= f.text_area :body, rows: 3, class: 'span4' %>
+  </div>
+  <%= f.submit 'Create comment', class: 'btn btn-primary' %>
+<% end %>
+
+<h5>Comments:</h5>
+
+<% @post.comments.each do |comment| %>
+  <div class="well span8">
+    <em>"<%= comment.body %>"</em>
+    <span class='quiet'> by</span> <%= comment.creator.username %>
+       <small>at <%= display_datetime(comment.created_at) %></small>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%
+=begin
+%>
+
+
+<%= render 'shared/errors', obj: @comment %>
+<h5>Leave a comment:</h5>
+<!-- /posts/:post_id/comments -->
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :body, rows: 5 %>
+  <br />
+  <%= f.submit "Create Comment", class: "btn btn-primary" %>
+<% end %>
+
+<% if @post.comments.any? %>
+<p>Comments</p>
+  <% @post.comments.each do |comment| %>
+    <div class='row well span8'>
+      <%= comment.body %><br/>
+      by <%= comment.creator.username %> at <%= comment.created_at %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<%
+=end
+%>

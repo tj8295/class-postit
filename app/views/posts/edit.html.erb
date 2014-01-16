@@ -1,3 +1,9 @@
-<p class="lead">Edit page</p>
+<%= render 'shared/content_title', title: 'Edit Post' %>
 
-<%= link_to('show post', post_path(@post)) %>
+<%= render 'form' %>
+
+
+
+
+
+<%= link_to 'Show post', post_path(@post) %>
