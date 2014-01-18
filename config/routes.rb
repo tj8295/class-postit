@@ -8,7 +8,8 @@ PostitTemplate::Application.routes.draw do
   # get '/posts/:id/edit', to: 'posts#edit'
   # patch '/posts/:id', to: 'posts#update'
 
-    get '/posts/man', to: 'posts#man'
+
+
 
 
    resources :posts, except: [:destroy] do

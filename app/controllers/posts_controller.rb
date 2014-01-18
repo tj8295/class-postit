@@ -14,12 +14,10 @@ class PostsController < ApplicationController
   end
 
   def create
-  binding.pry
     @post = Post.new(post_params)
-    # binding.pry
     @post.creator = User.first
     if @post.save
-      flash[:notice] = "Post created"
+      flash[:notice] = "Post created. http://www.yahoo.com".html_safe
       redirect_to posts_path
     else
       render :new
@@ -30,7 +28,6 @@ class PostsController < ApplicationController
 
 
   def update
-    binding.pry
     if @post.update(post_params)
       flash[:notice] = "The post was updated"
       redirect_to post_path(@post)
@@ -39,32 +36,11 @@ class PostsController < ApplicationController
     end
   end
 
-
-
-
-
-  # def update
-  #   if @post.update(post_params)
-  #     flash[:notice] = "The post was updated"
-  #     redirect_to posts_path
-  #   else
-  #     render :edit
-  #   end
-  # end
-
   private
 
-    def post_params
-      params.require(:post).permit(:title, :url, :description, category_ids: [])
-    end
-
-  # def post_params
-  #   # params.require(:post).permit(:title, :url, :creator)
-  #   # if user.admin?
-  #     params.require(:post).permit!
-  #   # else
-  #   #   params.require(:post).permit(:title, :url)
-  # end
+  def post_params
+    params.require(:post).permit(:title, :url, :description, category_ids: [])
+  end
 
   def set_post
     @post = Post.find(params[:id])
