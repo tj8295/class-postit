@@ -9,7 +9,8 @@ module ApplicationHelper
   end
 
   def create_or_update(ivar)
-    ivar.new_record? ? 'Create Post' : 'Update Post'
+    ivar.new_record? ? 'Create' : 'Update'
   end
+
 end
 

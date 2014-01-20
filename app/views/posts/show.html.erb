@@ -8,19 +8,21 @@
   <%= link_to @post.title, fix_url(@post.url) %></h4>
 <%#= render 'shared/content_title', title: @post.title %>
 <p>
-  <%= @post.description %>
+  <%= @post.description %> by <%= @post.creator.username %>
   <hr />
 </p>
-<small>by
-  <%= @post.creator.username %></small>
-<%= form_for [@post, @comment] do |f| %>
-  <!-- /posts/3/comments -->
-  <%= render 'shared/errors', obj: @comment %>
-  <div class='control-group'>
-    <%= f.label :body, 'Leave a comment' %>
-    <%= f.text_area :body, rows: 3, class: 'span4' %>
-  </div>
-  <%= f.submit 'Create comment', class: 'btn btn-primary' %>
+
+
+<% if logged_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <!-- /posts/3/comments -->
+    <%= render 'shared/errors', obj: @comment %>
+    <div class='control-group'>
+      <%= f.label :body, 'Leave a comment' %>
+      <%= f.text_area :body, rows: 3, class: 'span4' %>
+    </div>
+    <%= f.submit 'Create comment', class: 'btn btn-primary' %>
+  <% end %>
 <% end %>
 <h5>Comments:</h5>
 <% @post.comments.each do |comment| %>

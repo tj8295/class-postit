@@ -1,10 +1,11 @@
 class CategoriesController < ApplicationController
+  before_action :require_user, only: [:new, :create]
+
   def new
     @category = Category.new
   end
 
   def create
-    binding.pry
     @category = Category.new(category_params)
 
     if @category.save
@@ -16,7 +17,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    # binding.pry
     @category = Category.find(params[:id])
   end
 
