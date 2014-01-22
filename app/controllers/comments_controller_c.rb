@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsControllerC < ApplicationController
   def create
     # binding.pry
     @post = Post.find(params[:post_id])

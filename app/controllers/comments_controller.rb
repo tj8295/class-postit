@@ -16,6 +16,19 @@ class CommentsController < ApplicationController
     end
   end
 
+  def vote
+    @comment = Comment.find(params[:id])
+    @vote = Vote.create(vote: params[:vote], voteable:@comment, creator: current_user)
+
+    if @vote.valid?
+      flash[:notice] = "Your vote has been recorded."
+    else
+      flash[:error] = "You can only vote once."
+    end
+
+    redirect_to :back
+  end
+
 
   # def create
   #   # binding.pry

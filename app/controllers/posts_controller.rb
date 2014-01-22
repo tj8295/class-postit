@@ -29,7 +29,7 @@ class PostsController < ApplicationController
     # @post = Post.find(params[:id]) set in before_action
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
-    # if @vote.valid? && !
+    # if @vote.valid? && ! @vote.valid? means that it was successfully saved in DB
     if !@vote.errors.any?
       flash[:notice] = "Your vote was counted."
     else
