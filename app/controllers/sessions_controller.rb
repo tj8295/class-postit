@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     # 3. if so, log in
     # 4. if not, then error message
     # binding.pry
-    user = User.find_by(username: params[:username])
+    user = User.where(username: params[:username]).first
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = "You've logged in!"

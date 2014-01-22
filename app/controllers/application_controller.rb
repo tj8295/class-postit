@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
-
   def current_user
     # if there's authenticated user, reutrn the user obj
     # else return nil

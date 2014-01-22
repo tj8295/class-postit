@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :show, :update, :vote]
 
   def index
-    @posts = Post.all.sort_by{|x| x.total_votes}.reverse.take(15)
+    @posts = Post.all.sort_by { |x| x.total_votes }.reverse.take(15)
   end
 
   def show
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id]) set in before_action
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
     # if @vote.valid? && !

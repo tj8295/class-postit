@@ -1,11 +1,13 @@
 <div class="row">
   <div class='span0 well text-center'>
     <% if logged_in? %>
-      <%= link_to vote_post_path(post, vote: true, something: 'man'), method: 'post' do %>
-        <i class='icon-arrow-up'></i>
+      <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
+        <i class='icon-arrow-up'></i> <!-- FIXME: An extra space is being added to the link -->
       <% end %>
     <% end %>
-    <p><%= post.total_votes %></p>
+    <br>
+    <%= post.total_votes %> votes
+    <br>
     <% if logged_in? %>
       <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
         <i class='icon-arrow-down'></i>
@@ -18,7 +20,7 @@
     <p><%#= post.description %></p>
     <p>
       <span class='quiet'>posted by</span>
-      <%= post.creator.username %>
+      <%= link_to post.creator.username, post.creator %>
       <small>at
         <%= display_datetime(post.created_at) %></small>
       <small>
