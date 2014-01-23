@@ -16,3 +16,15 @@
 //= require_tree .
 //= require bootstrap
 
+// $(document).ready(function() {
+//     $('hit_form input').click(fucntion(){
+//         $.ajax({
+//             type: 'POST',
+//             url: '/player/hit',
+//             data: {param1: "hit", param2: 'there'}
+//         }).done(function(msg){
+//             $('#some_element').html(msg);
+//         })
+//     });
+// });
+

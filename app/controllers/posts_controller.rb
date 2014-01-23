@@ -29,14 +29,19 @@ class PostsController < ApplicationController
     # @post = Post.find(params[:id]) set in before_action
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
-    # if @vote.valid? && ! @vote.valid? means that it was successfully saved in DB
-    if !@vote.errors.any?
-      flash[:notice] = "Your vote was counted."
-    else
-      flash[:error] = "You can only vote for that once."
-    end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "Your vote was counted." }
+      format.js
+    end
+    # if @vote.valid? && ! @vote.valid? means that it was successfully saved in DB
+    # if !@vote.errors.any?
+    #   flash[:notice] = "Your vote was counted."
+    # else
+    #   flash[:error] = "You can only vote for that once."
+    # end
+
+    # redirect_to :back
   end
 
   def edit; end
