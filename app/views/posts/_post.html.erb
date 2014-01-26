@@ -1,4 +1,7 @@
 <div class="row">
+  <div id="post_vote_error_<%= post.to_param %>" class="row alert alert-error" style="display: none">
+     You can only vote once on a post.
+  </div>
   <div class='span0 well text-center'>
     <% if logged_in? %>
      <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
@@ -6,7 +9,7 @@
       <% end %>
     <% end %>
     <br>
-   <span id='post_<%= post.id %>_votes'> <%= post.total_votes %></span> votes
+   <span id='post_<%= post.to_param %>_votes'> <%= post.total_votes %></span> votes
     <br>
     <% if logged_in? %>
       <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>

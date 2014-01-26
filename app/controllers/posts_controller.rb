@@ -4,10 +4,25 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.sort_by { |x| x.total_votes }.reverse.take(15)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
+      format.xml { render xml: @post }
+    end
   end
 
+
   def show
+    #binding.pry
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
+
+      format.xml { render xml: @post }
+    end
   end
 
   def new
@@ -30,8 +45,16 @@ class PostsController < ApplicationController
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
 
+
     respond_to do |format|
-      format.html { redirect_to :back, notice: "Your vote was counted." }
+      format.html {
+        if @vote.valid? #or .errors.any?
+          flash[:notice] = "Your vote was counted."
+        else
+          flash[:error] = "You can only vote once."
+        end
+        redirect_to :back
+      }
       format.js
     end
     # if @vote.valid? && ! @vote.valid? means that it was successfully saved in DB

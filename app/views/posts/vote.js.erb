@@ -1,1 +1,7 @@
-$('#post_<%= @post.id %>_votes').html('<%= @post.total_votes %>');
+<% if @vote.valid? %>
+  $('#post_<%= @post.to_param %>_votes').html('<%= @post.total_votes %>');
+<% else %>
+  // alert("You can only vote on <%= @post.title %> once!")
+  $('#post_vote_error_<%= @post.to_param %>').show().html('<%= @vote.errors.full_messages.join('') %>');
+  // have to join the messages becasue its an array
+<% end %>

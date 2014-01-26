@@ -36,7 +36,6 @@ PostitTemplate::Application.routes.draw do
     end
   end
 
-
   resources :categories, only: [:new, :create, :show]
 
   get '/activate/:id', to: 'users#activate'
@@ -56,22 +55,6 @@ PostitTemplate::Application.routes.draw do
   #             PATCH  /users/:id       users#update
   #             PUT    /users/:id       users#update
   #             DELETE /users/:id       users#destroy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
