@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post         = Post.new(post_params)
     @post.creator = current_user
     @post.creator = nil
     if @post.save
@@ -44,7 +44,6 @@ class PostsController < ApplicationController
   def vote
     # @post = Post.find(params[:id]) set in before_action
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
-
 
 
     respond_to do |format|
@@ -68,7 +67,8 @@ class PostsController < ApplicationController
     # redirect_to :back
   end
 
-  def edit; end
+  def edit;
+  end
 
 
   def update

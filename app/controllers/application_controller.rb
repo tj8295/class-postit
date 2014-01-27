@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
-
-
-
   def current_user
     # if there's authenticated user, reutrn the user obj
     # else return nil
@@ -40,8 +37,8 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    flash[:error] = "Must be admin for that"
-    redirect_to :back
+    flash[:error] = "You can't do that."
+    redirect_to root_path
   end
 
 end

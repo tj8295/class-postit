@@ -17,6 +17,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'htmlbeautifier'
 gem 'voteable_tom_jan', path: '/Users/Tom/rails_3_tutorial/workspace/rails_second/voteable-gem'
+gem 'twilio-ruby'
 
 group :doc do
   gem 'sdoc', require: false

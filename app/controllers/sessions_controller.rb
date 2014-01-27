@@ -1,24 +1,45 @@
 class SessionsController < ApplicationController
-  def new
 
+  def new
   end
 
   def create
-    # follow this example user.authenticate('password')
-    # 1. get the user obj
-    # 2. see if password matches
-    # 3. if so, log in
-    # 4. if not, then error message
-    # binding.pry
     user = User.where(username: params[:username]).first
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:notice] = "You've logged in!"
-      redirect_to root_path
-      #redirect
+      # binding.pry
+      if user.two_factor_auth?
+        session[:two_factor] = true
+        user.generate_pin!
+        user.send_pin_to_twilio
+        #send pin to twilio, #sms to users phone
+
+        #show pin form
+        redirect_to pin_path
+
+      else
+        login_success(user)
+      end
+        #redirect
     else
       flash.now[:error] = "There is something wrong with your username or password."
       render :new
+    end
+  end
+
+  def pin
+    access_denied if session[:two_factor].nil?
+    if request.post?
+      session[:two_factor] = nil
+      user = User.find_by(pin: params[:pin])
+      # binding.pry
+      if user
+        user.remove_pin!
+        login_success(user)
+
+      else
+        flash[:error] = "Incorrect Pin"
+        redirect_to login_path
+      end
     end
   end
 
@@ -29,5 +50,9 @@ class SessionsController < ApplicationController
   end
 
   private
-
+    def login_success(user)
+      session[:user_id] = user.id
+      flash[:notice] = "You've logged in!"
+      redirect_to root_path
+    end
 end
