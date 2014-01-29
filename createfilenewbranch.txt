@@ -1,1 +1,5 @@
 makes the code a lot better
+
+function refactor {
+
+}
